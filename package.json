@@ -1,8 +1,8 @@
 {
-  "name": "vue-multiselect",
-  "version": "2.0.8",
+  "name": "vue-multiselect-ar",
+  "version": "2.0.9",
   "description": "Multiselect component for vue.js",
-  "author": "Damian Dulisz <damian.dulisz@gmail.com>",
+  "author": "Damian Dulisz <damian.dulisz@gmail.com> - Omid Pilevar <omid@arvancloud.com> editted",
   "private": false,
   "license": "MIT",
   "bugs": {

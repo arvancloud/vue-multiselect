@@ -335,11 +335,7 @@ export default {
       return options.slice(0, this.optionsLimit)
     },
     valueKeys () {
-      if (this.trackBy) {
-        return this.internalValue.map(element => element[this.trackBy])
-      } else {
-        return this.internalValue
-      }
+      return this.internalValue
     },
     optionKeys () {
       const options = this.groupValues ? this.flatAndStrip(this.options) : this.options
@@ -349,7 +345,7 @@ export default {
       return this.multiple
         ? this.searchable ? '' : this.placeholder
         : this.internalValue.length
-          ? this.getOptionLabel(this.internalValue[0])
+          ? this.internalValue[0]
           : this.searchable ? '' : this.placeholder
     }
   },
@@ -500,7 +496,11 @@ export default {
         } else if (this.multiple) {
           this.internalValue.push(option)
         } else {
-          this.internalValue = [option]
+          if (this.trackBy) {
+            this.internalValue = [option[this.trackBy]]
+          } else {
+            this.internalValue = [option]
+          }
         }
         this.$emit('select', deepClone(option), this.id)
         this.$emit('input', this.getValue(), this.id)
@@ -528,11 +528,6 @@ export default {
         return
       }
 
-      const index = typeof option === 'object'
-        ? this.valueKeys.indexOf(option[this.trackBy])
-        : this.valueKeys.indexOf(option)
-
-      this.internalValue.splice(index, 1)
       this.$emit('input', this.getValue(), this.id)
       this.$emit('remove', deepClone(option), this.id)
 
